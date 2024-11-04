@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
+use App\Http\Controllers\Profile\AvatarController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,10 +16,10 @@ use App\Models\User;
 */
 
 Route::get('/', function () {
-    // return view('welcome');
+    return view('welcome');
 
 
-    $users = User::get();
+    // $users = User::get();
 
     // $users = User::create([
     //     'name' => 'John Doe',
@@ -26,8 +27,8 @@ Route::get('/', function () {
     //     'password' => 'password'
     // ]);
 
-    // $users = User::find(5)->update([
-    //     'name' => 'John Doe Updated'
+    // $users = User::find(1)->update([
+    //     'password' => 'Password1234'
     // ]);
 
     // $users = User::find(5)->delete();
@@ -40,7 +41,7 @@ Route::get('/', function () {
 
 
     // $users = DB::delete("delete from users where id = ?", ['2']);
-    dd($users);
+    // dd($users);
 });
 
 Route::get('/dashboard', function () {
@@ -51,6 +52,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::patch('/profile/avatar', [AvatarController::class, 'update'])->name('profile.update');
+    // Route::patch('profile/avatar', [AvatarController::class, 'update'])->name('profile.avatar');
 });
 
 require __DIR__.'/auth.php';
