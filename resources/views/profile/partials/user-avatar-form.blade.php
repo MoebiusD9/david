@@ -4,15 +4,13 @@
             {{ __('User Avatar') }}
         </h2>
 
+        <img class="w-8 h-8 rounded-full" src="{{ "/storage/$user->avatar" }}" alt="user avatar">
+
         <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
             {{ __("Add User Avatar") }}
         </p>
     </header>
-        @if (@session('message'))
-            <div class="text-red-500">
-                {{  session('message') }}
-            </div>
-        @endif
+
         <form method="post" action="{{ route('profile.update') }}" enctype="multipart/form-data">
             @csrf
             @method ('patch')
@@ -28,3 +26,12 @@
             </div>
         </form>
 </section>
+@if (@session('message'))
+<script>
+    Swal.fire({
+    title: "Success",
+    text: "Updated Successfully",
+    icon: "success"
+    });
+</script>
+@endif
